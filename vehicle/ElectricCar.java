@@ -3,6 +3,7 @@ package vehicle;
 public abstract class ElectricCar extends Car {
     
     private double milesOnMaxCharge;
+    private double range;
 
     /**
      * Note: Car begins with a full charge (and thus range).
@@ -11,6 +12,7 @@ public abstract class ElectricCar extends Car {
     public ElectricCar(String make, String model, double startingOdometerValue, double milesOnMaxCharge) {
         super(make, model, startingOdometerValue);
         this.milesOnMaxCharge = milesOnMaxCharge;
+        range = milesOnMaxCharge;
     }
 
     /**
@@ -40,18 +42,28 @@ public abstract class ElectricCar extends Car {
      * recharging.
      */
     public double getRemainingRange() {
-        
+        return range;
     }
 
     /**
      * Returns how many miles the car could go on a full charge.
      */
-    public double getMaxRange() {}
+    public double getMaxRange() {
+        return milesOnMaxCharge;
+    }
     
-    /** Recharges the car to max range capability. */
-    public void recharge() {}
-    /** Decreases the amount of energy in the battery based by the number
-    of miles passed as an argument. */
-    protected void decreaseCharge(double miles) {}
+    /**
+     * Recharges the car to max range capability.
+     */
+    public void recharge() {
+        range = milesOnMaxCharge;
+    }
 
+    /**
+     * Decreases the amount of energy in the battery based by the number
+     * of miles passed as an argument.
+     */
+    protected void decreaseCharge(double miles) {
+        range -= miles;
+    }
 }
