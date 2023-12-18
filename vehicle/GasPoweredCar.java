@@ -41,7 +41,8 @@ public abstract class GasPoweredCar extends Car {
         if (0 > miles || fuel < (miles / mpg)) {
             throw new IllegalArgumentException();
         }
-        if (canDrive()) {
+        if (canDrive(miles)) {
+            addMiles(miles);
             decreaseFuelLevel(miles);
         }
     }
