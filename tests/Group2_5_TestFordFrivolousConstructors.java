@@ -14,8 +14,8 @@ public class Group2_5_TestFordFrivolousConstructors extends BCATestScenario {
       FordFrivolous F3 = new FordFrivolous(-50);
     }, "Negative starting mileage should throw an exception.");
 
-    assertEquals(F1.getMileage(), 0, 0.1, "F1 mileage should be 0");
-    assertEquals(F2.getMileage(), 50, 0.1, "F2 mileage should be 50");
+    assertEquals(F1.getRemainingRange(), 0, 0.1, "F1 mileage should be 0");
+    assertEquals(F2.getRemainingRange(), 50, 0.1, "F2 mileage should be 50");
 
     assertEquals(F1.getMPG(), 23.6, 0.1, "F2 MPG should be 23.6");
     assertEquals(F2.getMPG(), 23.6, 0.1, "F2 MPG should be 23.6");

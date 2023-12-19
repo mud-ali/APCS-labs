@@ -3,8 +3,8 @@ package tests;
 import vehicle.ChevroletBird;
 import bcatest.BCATestScenario;
 
-public class Group2_1_TestChevroletBird2_Flying extends BCATestScenario{
-    public int runTest() { 
+public class Group2_1_TestChevroletBird2_Flying extends BCATestScenario {
+    public int runTest() {
         ChevroletBird b3 = new ChevroletBird();
 
         assertEquals(b3.getRemainingRange(), 250, 0.1, "getRemainingRange() should return 250");
@@ -13,15 +13,19 @@ public class Group2_1_TestChevroletBird2_Flying extends BCATestScenario{
 
         assertTrue(b3.canFly(0), "Can can fly 0 miles");
 
-        assertThrows(IllegalArgumentException.class, ()->{b3.canFly(-20000);}, "Car cannot fly negative miles");
+        assertThrows(IllegalArgumentException.class, () -> {
+            b3.canFly(-20000);
+        }, "Car cannot fly negative miles");
 
         b3.fly(250);
 
-        assertEquals(b3.getMileage(), 0.0, 0.1, "getMileage() should return 0");
+        assertEquals(b3.getRemainingRange(), 0.0, 0.1, "getRemainingRange() should return 0");
 
         assertTrue(b3.checkWingsExtended(), "wings should be extended");
 
-        assertThrows(IllegalArgumentException.class, ()->{b3.drive(200);}, "Car does not have enough charge to drive 200 miles");
+        assertThrows(IllegalArgumentException.class, () -> {
+            b3.drive(200);
+        }, "Car does not have enough charge to drive 200 miles");
 
         b3.recharge();
 
@@ -35,9 +39,9 @@ public class Group2_1_TestChevroletBird2_Flying extends BCATestScenario{
 
         assertEquals(b3.getRemainingRange(), 0, 0.1, "getRemainingRange() should return 0");
 
-        assertEquals(b3.getMileage(), 250, 0.1, "getMileage()) should return 250");
+        assertEquals(b3.getRemainingRange(), 250, 0.1, "getRemainingRange()) should return 250");
 
         return getFailedCount();
     }
-    
+
 }

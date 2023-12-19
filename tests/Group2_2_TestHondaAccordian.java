@@ -48,7 +48,7 @@ public class Group2_2_TestHondaAccordian extends BCATestScenario {
 		if (twoArg) {
 			c = new HondaAccordian(mileage, year);
 		}
-		assertEquals(c.getMileage(), mileage, 0, "Mileage is not set to " + mileage);
+		assertEquals(c.getRemainingRange(), mileage, 0, "Mileage is not set to " + mileage);
 		assertEquals(c.getMake(), "Honda", "Make is not Honda");
 		assertEquals(c.getModel(), "Accordian", "Model is not Accordian");
 		assertEquals(c.toString(), year + " Honda Accordian (" + mileage + " mi)", "toString() is incorrect");
@@ -69,11 +69,11 @@ public class Group2_2_TestHondaAccordian extends BCATestScenario {
 	private void runDriveTest() {
 		HondaAccordian c = new HondaAccordian(2022);
 		c.drive(10);
-		assertEquals(c.getMileage(), 10, 0.01, "Mileage is not set to 10");
+		assertEquals(c.getRemainingRange(), 10, 0.01, "Mileage is not set to 10");
 		c.drive(50);
-		assertEquals(c.getMileage(), 60, 0.01, "Mileage is not set to 60");
+		assertEquals(c.getRemainingRange(), 60, 0.01, "Mileage is not set to 60");
 		c.drive(0);
-		assertEquals(c.getMileage(), 60, 0.01, "Mileage is not set to 60");
+		assertEquals(c.getRemainingRange(), 60, 0.01, "Mileage is not set to 60");
 		assertThrows(
 				IllegalArgumentException.class,
 				() -> {
@@ -87,8 +87,8 @@ public class Group2_2_TestHondaAccordian extends BCATestScenario {
 				},
 				"Illegal Argument Exception not thrown");
 		c.drive(c.getMPG() * c.getFuelLevel());
-		assertEquals(c.getMileage(), 481.4, .01, "Mileage not set to 481.4");
-		assertEquals(c.getMileage(), c.getFuelCapacity() * c.getMPG(), .01,
+		assertEquals(c.getRemainingRange(), 481.4, .01, "Mileage not set to 481.4");
+		assertEquals(c.getRemainingRange(), c.getFuelCapacity() * c.getMPG(), .01,
 				"Mileage does not match max milage per tank");
 		assertEquals(c.getFuelLevel(), 0, .01, "Fuel level is not 0");
 	}
@@ -96,9 +96,9 @@ public class Group2_2_TestHondaAccordian extends BCATestScenario {
 	private void runGetterTest() {
 		HondaAccordian c = new HondaAccordian(2022);
 		c.drive(50);
-		assertEquals(c.getMileage(), 50, 0, "Mileage is not set to 50");
-//		assertTrue(c.getRemainingRange() == c.getMPG() * c.getFuelCapacity() - 50,
-//				"Remaining miles do not match driven miles");
+		assertEquals(c.getRemainingRange(), 50, 0, "Mileage is not set to 50");
+		// assertTrue(c.getRemainingRange() == c.getMPG() * c.getFuelCapacity() - 50,
+		// "Remaining miles do not match driven miles");
 		assertTrue(c.getFuelLevel() == c.getFuelCapacity() - (50 / c.getMPG()),
 				"Fuel level does not match driven miles");
 	}
@@ -140,7 +140,7 @@ public class Group2_2_TestHondaAccordian extends BCATestScenario {
 		assertTrue(c.canDrive(c.getMPG() * c.getFuelLevel() + 1) == false, "Can't drive over the remaining range.");
 		assertTrue(c.canDrive(8) == true, "Can drive under the remaining range.");
 
-		assertTrue(c.getMileage() == 15, "Mileage should be 0 miles.");
+		assertTrue(c.getRemainingRange() == 15, "Mileage should be 0 miles.");
 		assertTrue(c.getMake().equals("Honda"), "Make is Honda.");
 
 		assertTrue(c.toString().equals("2010 Honda Accordian (15.0 mi)"),

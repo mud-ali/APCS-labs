@@ -13,7 +13,7 @@ public class Group2_5_TestChevConstructors extends BCATestScenario {
     assertEquals(c1.getModel(), "Bird", "c1 model should be Bird.");
     assertFalse(c1.checkWingsExtended(), "Wings extended should be false.");
 
-    assertEquals(c1.getMileage(), 0, .1, "Starting mileage should be correct.");
+    assertEquals(c1.getRemainingRange(), 0, .1, "Starting mileage should be correct.");
     assertEquals(c1.toString(), "Chevrolet Bird (0.0 mi)", "toString should work.");
     assertEquals(c1.getMaxRange(), 250, .1, "Max range should be correct.");
 
@@ -24,7 +24,7 @@ public class Group2_5_TestChevConstructors extends BCATestScenario {
     assertEquals(c2.getModel(), "Bird", "c2 model should be Bird.");
     assertFalse(c2.checkWingsExtended(), "Wings extended should be false.");
 
-    assertEquals(c2.getMileage(), 20, .1, "Starting mileage is correct.");
+    assertEquals(c2.getRemainingRange(), 20, .1, "Starting mileage is correct.");
     assertEquals(c2.toString(), "Chevrolet Bird (20.0 mi)", "toString should work.");
     assertEquals(c2.getMaxRange(), 250, .1, "Max range should be correct.");
 

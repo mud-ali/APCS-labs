@@ -26,7 +26,7 @@ public class Group2_2_TestTeslaModelZ extends BCATestScenario {
         TeslaModelZ t5 = new TeslaModelZ(0);
         TeslaModelZ t6 = new TeslaModelZ(-1);
 
-        assertTrue(t4.getMileage() == 0, "Starting mileage should equal 0.");
+        assertTrue(t4.getRemainingRange() == 0, "Starting mileage should equal 0.");
 
         // Methods of TeslaModelZ
 
@@ -58,7 +58,7 @@ public class Group2_2_TestTeslaModelZ extends BCATestScenario {
         assertTrue(t1.canDrive(336) == false, "Can't drive over the remaining range.");
         assertTrue(t1.canDrive(8) == true, "Can drive under the remaining range.");
 
-        assertTrue(t6.getMileage() == 0.0, "Mileage should be 0 miles.");
+        assertTrue(t6.getRemainingRange() == 0.0, "Mileage should be 0 miles.");
         assertTrue(t6.getMake().equals("Tesla"), "Make is Tesla.");
 
         assertTrue(t6.getModel().equals("Z-1"), "Model should be Z-1");

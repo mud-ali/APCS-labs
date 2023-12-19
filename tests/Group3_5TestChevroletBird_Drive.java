@@ -18,16 +18,16 @@ public class Group3_5TestChevroletBird_Drive extends BCATestScenario {
 
         chev.drive(10);
 
-        assertEquals(chev.getMileage(), 10, 0.1, "mileage should be 10");
+        assertEquals(chev.getRemainingRange(), 10, 0.1, "mileage should be 10");
 
         chev.drive(200);
 
-        assertEquals(chev.getMileage(), 210, 0.1, "mileage should be 210");
+        assertEquals(chev.getRemainingRange(), 210, 0.1, "mileage should be 210");
         assertEquals(chev.getRemainingRange(), 40, 0.1, "remaining range should be 40");
 
         chev.drive(40);
 
-        assertEquals(chev.getMileage(), 250, 0.1, "mileage should be 250");
+        assertEquals(chev.getRemainingRange(), 250, 0.1, "mileage should be 250");
         assertThrows(IllegalArgumentException.class, () -> {
             chev.drive(0.1);
         },

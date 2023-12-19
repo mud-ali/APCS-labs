@@ -1,14 +1,15 @@
 package tests;
+
 import bcatest.BCATestScenario;
 import vehicle.ChevroletBird;
 
-public class Group7_4_ChevroletBird_Constructor1 extends BCATestScenario{
+public class Group7_4_ChevroletBird_Constructor1 extends BCATestScenario {
 
     @Override
     public int runTest() {
         ChevroletBird c1 = new ChevroletBird();
 
-        assertEquals(c1.getMileage(), 0, .1, "Car should begin with 0 mileage.");
+        assertEquals(c1.getRemainingRange(), 0, .1, "Car should begin with 0 mileage.");
 
         assertEquals(c1.getRemainingRange(), 250, .1, "Car's remaining range should be 250.");
 

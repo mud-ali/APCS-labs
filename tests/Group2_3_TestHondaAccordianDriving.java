@@ -8,14 +8,15 @@ public class Group2_3_TestHondaAccordianDriving extends BCATestScenario {
         HondaAccordian a = new HondaAccordian(2020);
 
         assertThrows(
-            IllegalArgumentException.class,
-            () -> {a.drive(-1);},
-            "Illegal Argument Exception not thrown"
-        );
+                IllegalArgumentException.class,
+                () -> {
+                    a.drive(-1);
+                },
+                "Illegal Argument Exception not thrown");
 
         a.drive(0);
 
-        assertEquals(a.getMileage(), 0, 0.1, "Mileage should be 0");
+        assertEquals(a.getRemainingRange(), 0, 0.1, "Mileage should be 0");
 
         assertFalse(a.canDrive(100000), "Can Drive for 100000 should be false");
         assertTrue(a.canDrive(400), "Can Drive for 400 should be true");
@@ -29,10 +30,11 @@ public class Group2_3_TestHondaAccordianDriving extends BCATestScenario {
         assertEquals(a.getFuelLevel(), 0, 0.1, "Remaining fuel should be 0");
 
         assertThrows(
-            IllegalArgumentException.class,
-            () -> {a.drive(500);},
-            "Illegal Argument Exception not thrown"
-        );
+                IllegalArgumentException.class,
+                () -> {
+                    a.drive(500);
+                },
+                "Illegal Argument Exception not thrown");
 
         a.refillTank();
 

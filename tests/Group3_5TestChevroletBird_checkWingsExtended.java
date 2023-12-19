@@ -8,7 +8,7 @@ public class Group3_5TestChevroletBird_checkWingsExtended extends BCATestScenari
         public int runTest() {
                 ChevroletBird chevie = new ChevroletBird();
 
-                assertEquals(chevie.getMileage(), 0, 0.1, "mileage should equal 0");
+                assertEquals(chevie.getRemainingRange(), 0, 0.1, "mileage should equal 0");
                 assertFalse(chevie.checkWingsExtended(), "checkWingsExtended should be false");
 
                 assertThrows(IllegalArgumentException.class, () -> {
@@ -26,7 +26,7 @@ public class Group3_5TestChevroletBird_checkWingsExtended extends BCATestScenari
                 chevie.fly(30);
                 assertEquals(chevie.getRemainingRange(), 220, 0.1,
                                 "chevie.getRemainingRange should be 220");
-                assertEquals(chevie.getMileage(), 0, 0.1, "chevie.getMileage should be 0");
+                assertEquals(chevie.getRemainingRange(), 0, 0.1, "chevie.getRemainingRange should be 0");
 
                 assertTrue(chevie.checkWingsExtended(),
                                 "checkWingsExtended should be true");

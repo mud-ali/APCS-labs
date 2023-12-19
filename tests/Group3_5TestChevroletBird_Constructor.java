@@ -8,7 +8,7 @@ public class Group3_5TestChevroletBird_Constructor extends BCATestScenario {
         @Override
         public int runTest() {
                 ChevroletBird c1 = new ChevroletBird(100);
-                assertEquals(c1.getMileage(), 100, 0.1, "mileage should be 100");
+                assertEquals(c1.getRemainingRange(), 100, 0.1, "mileage should be 100");
                 assertEquals(c1.getRemainingRange(), 250, 0.1,
                                 "remaining range should be 250");
                 assertFalse(c1.checkWingsExtended(),
@@ -18,7 +18,7 @@ public class Group3_5TestChevroletBird_Constructor extends BCATestScenario {
                 assertEquals(c1.getModel(), "Bird", "the make of c1 should be Bird");
 
                 ChevroletBird c2 = new ChevroletBird();
-                assertEquals(c2.getMileage(), 0, 0.1, "mileage should be 0");
+                assertEquals(c2.getRemainingRange(), 0, 0.1, "mileage should be 0");
                 assertEquals(c2.getRemainingRange(), 250, 0.1,
                                 "remaining range should be 250");
                 assertFalse(c2.checkWingsExtended(),

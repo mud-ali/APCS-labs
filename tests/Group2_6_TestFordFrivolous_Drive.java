@@ -1,12 +1,10 @@
 package tests;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
 import bcatest.BCATestScenario;
 import vehicle.FordFrivolous;
-
 
 public class Group2_6_TestFordFrivolous_Drive extends BCATestScenario {
 
@@ -22,11 +20,11 @@ public class Group2_6_TestFordFrivolous_Drive extends BCATestScenario {
 
         f.drive(10.1);
 
-        assertEquals(f.getMileage(), 10.1, 0.1, "Mileage should be 10.1.");
+        assertEquals(f.getRemainingRange(), 10.1, 0.1, "Mileage should be 10.1.");
 
         f.drive(0.0);
 
-        assertEquals(f.getMileage(), 10.1, 0.1, "Mileage should be 10.1.");
+        assertEquals(f.getRemainingRange(), 10.1, 0.1, "Mileage should be 10.1.");
 
         assertEquals(f.getMPG(), 23.6, 0.1, "MPG should be 23.6.");
 
@@ -40,7 +38,7 @@ public class Group2_6_TestFordFrivolous_Drive extends BCATestScenario {
 
         assertEquals(f2.getFuelLevel(), 0.0, 0.1, "Fuel level should be 0.");
 
-        assertEquals(f2.getMileage(), 472.0, 0.1, "Mileage should be 472.");
+        assertEquals(f2.getRemainingRange(), 472.0, 0.1, "Mileage should be 472.");
 
         assertThrows(IllegalArgumentException.class, () -> {
             f.drive(f.getRemainingRange() + 0.1);
@@ -74,15 +72,15 @@ public class Group2_6_TestFordFrivolous_Drive extends BCATestScenario {
         list.add(5.0);
         list.add(10.0);
         assertEquals(f3.roadTrip(list), 2, "Roadtrip is incorrect.");
-        assertEquals(f3.getMileage(), 15.0, .1, "Roadtrip is incorrect.");
+        assertEquals(f3.getRemainingRange(), 15.0, .1, "Roadtrip is incorrect.");
 
         list.clear();
 
         list.add(f3.getRemainingRange());
         list.add(.1);
         list.add(-1.0);
-//        assertEquals(f3.roadTrip(list), 1, "Roadtrip is incorrect.");
-//        assertEquals(f3.getMileage(), 472.0, .1, "Roadtrip is incorrect.");
+        // assertEquals(f3.roadTrip(list), 1, "Roadtrip is incorrect.");
+        // assertEquals(f3.getRemainingRange(), 472.0, .1, "Roadtrip is incorrect.");
 
         f3.refillTank();
         assertThrows(IllegalArgumentException.class, () -> {
@@ -94,13 +92,13 @@ public class Group2_6_TestFordFrivolous_Drive extends BCATestScenario {
         f3.refillTank();
 
         f3.driveAutonomously(0);
-        assertEquals(f3.getMileage(), 15, 0.1, "Should be 15 before self drive.");
+        assertEquals(f3.getRemainingRange(), 15, 0.1, "Should be 15 before self drive.");
 
-        assertEquals(f3.getMileage(), 15.0, 0.1, "Autonomously driving 0 miles should not increase mileage.");
+        assertEquals(f3.getRemainingRange(), 15.0, 0.1, "Autonomously driving 0 miles should not increase mileage.");
 
         f3.driveAutonomously(f3.getRemainingRange() / 2);
 
-        assertEquals(f3.getMileage(), 251, 0.1,
+        assertEquals(f3.getRemainingRange(), 251, 0.1,
                 "Autonomously driving the half of the range should increase the mileage by 236.");
 
         assertEquals(f3.getFuelLevel(), 0.0, 0.1,
@@ -110,7 +108,7 @@ public class Group2_6_TestFordFrivolous_Drive extends BCATestScenario {
 
         f3.driveAutonomously(f3.getRemainingRange());
 
-        assertEquals(f3.getMileage(), 487, 0.1,
+        assertEquals(f3.getRemainingRange(), 487, 0.1,
                 "Driving over the max range should be allowed and should stop at range = 0 ");
 
         assertThrows(IllegalArgumentException.class, () -> {
@@ -144,7 +142,7 @@ public class Group2_6_TestFordFrivolous_Drive extends BCATestScenario {
 
         assertEquals(f4.getFuelLevel(), 0, 0.1, "Flying should decrease fuel level with 1/3 the mpg of driving.");
 
-        assertEquals(f4.getMileage(), 0.0, 0.1, "Flying should not change mileage");
+        assertEquals(f4.getRemainingRange(), 0.0, 0.1, "Flying should not change mileage");
 
         return getFailedCount();
     }

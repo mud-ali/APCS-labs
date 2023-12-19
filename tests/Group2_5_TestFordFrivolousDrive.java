@@ -25,7 +25,7 @@ public class Group2_5_TestFordFrivolousDrive extends BCATestScenario {
     F1.drive(0);
     assertEquals(F1.getRemainingRange(), 472, 0.1, "Remaning range is incorrect.");
     assertEquals(F1.getFuelLevel(), 20, 0.1, "Fuel level is incorrect.");
-    assertEquals(F1.getMileage(), 0, 0.1, "Mileage is incorrect, line 26.");
+    assertEquals(F1.getRemainingRange(), 0, 0.1, "Mileage is incorrect, line 26.");
 
     assertThrows(IllegalArgumentException.class, () -> {
       F1.drive(-100);
@@ -37,7 +37,7 @@ public class Group2_5_TestFordFrivolousDrive extends BCATestScenario {
     F1.drive(272);
     assertEquals(F1.getRemainingRange(), 200, 0.1, "Remaning range is incorrect.");
     assertEquals(F1.getFuelLevel(), 8.5, 0.1, "Fuel level is incorrect.");
-    assertEquals(F1.getMileage(), 272, 0.1, "Mileage is incorrect.");
+    assertEquals(F1.getRemainingRange(), 272, 0.1, "Mileage is incorrect.");
 
     assertThrows(IllegalArgumentException.class, () -> {
       F2.drive(472.1);
@@ -46,17 +46,17 @@ public class Group2_5_TestFordFrivolousDrive extends BCATestScenario {
     F2.drive(272);
     assertEquals(F2.getRemainingRange(), 200, 0.1, "Remaning range is incorrect.");
     assertEquals(F2.getFuelLevel(), 8.5, 0.1, "Fuel level is incorrect.");
-    assertEquals(F2.getMileage(), 322, 0.1, "Mileage is incorrect.");
+    assertEquals(F2.getRemainingRange(), 322, 0.1, "Mileage is incorrect.");
 
     F1.refillTank();
     assertEquals(F1.getRemainingRange(), 472, 0.1, "Remaning range is incorrect.");
     assertEquals(F1.getFuelLevel(), 20, 0.1, "Fuel level is incorrect.");
-    assertEquals(F1.getMileage(), 272, 0.1, "Mileage is incorrect.");
+    assertEquals(F1.getRemainingRange(), 272, 0.1, "Mileage is incorrect.");
 
     F2.refillTank();
     assertEquals(F2.getRemainingRange(), 472, 0.1, "Remaning range is incorrect.");
     assertEquals(F2.getFuelLevel(), 20, 0.1, "Fuel level is incorrect.");
-    assertEquals(F2.getMileage(), 322, 0.1, "Mileage is incorrect.");
+    assertEquals(F2.getRemainingRange(), 322, 0.1, "Mileage is incorrect.");
 
     assertThrows(IllegalArgumentException.class, () -> {
       F1.refillTank(1.0);
@@ -65,12 +65,12 @@ public class Group2_5_TestFordFrivolousDrive extends BCATestScenario {
     F1.drive(236);
     assertEquals(F1.getRemainingRange(), 236, 0.1, "Remaning range is incorrect.");
     assertEquals(F1.getFuelLevel(), 10, 0.1, "Fuel level is incorrect.");
-    assertEquals(F1.getMileage(), 508, 0.1, "Mileage is incorrect.");
+    assertEquals(F1.getRemainingRange(), 508, 0.1, "Mileage is incorrect.");
 
     F2.drive(236);
     assertEquals(F2.getRemainingRange(), 236, 0.1, "Remaning range is incorrect.");
     assertEquals(F2.getFuelLevel(), 10, 0.1, "Fuel level is incorrect.");
-    assertEquals(F2.getMileage(), 558, 0.1, "Mileage is incorrect.");
+    assertEquals(F2.getRemainingRange(), 558, 0.1, "Mileage is incorrect.");
 
     assertThrows(IllegalArgumentException.class, () -> {
       F1.refillTank(-2.0);
@@ -99,7 +99,7 @@ public class Group2_5_TestFordFrivolousDrive extends BCATestScenario {
     F1.drive(354);
     assertEquals(F1.getRemainingRange(), 0, 0.1, "Remaning range is incorrect.");
     assertEquals(F1.getFuelLevel(), 0, 0.1, "Fuel level is incorrect.");
-    assertEquals(F1.getMileage(), 862, 0.1, "Mileage is incorrect.");
+    assertEquals(F1.getRemainingRange(), 862, 0.1, "Mileage is incorrect.");
 
     assertThrows(IllegalArgumentException.class, () -> {
       F2.drive(355);
@@ -108,7 +108,7 @@ public class Group2_5_TestFordFrivolousDrive extends BCATestScenario {
     F2.drive(354);
     assertEquals(F2.getRemainingRange(), 0, 0.1, "Remaning range is incorrect.");
     assertEquals(F2.getFuelLevel(), 0, 0.1, "Fuel level is incorrect.");
-    assertEquals(F2.getMileage(), 912, 0.1, "Mileage is incorrect.");
+    assertEquals(F2.getRemainingRange(), 912, 0.1, "Mileage is incorrect.");
 
     F1.refillTank();
     assertEquals(F1.getFuelLevel(), 20, 0.1, "Fuel level is incorrect.");
@@ -117,7 +117,8 @@ public class Group2_5_TestFordFrivolousDrive extends BCATestScenario {
     assertEquals(F2.getFuelLevel(), 20, 0.1, "Fuel level is incorrect.");
 
     assertEquals(F1.roadTrip(Arrays.asList(473.0)), 0, 0.1, "Road trip is incorrect.");
-//    assertEquals(F1.roadTrip(Arrays.asList(473.0, -1.0)), 0, 0.1, "Road trip is incorrect.");
+    // assertEquals(F1.roadTrip(Arrays.asList(473.0, -1.0)), 0, 0.1, "Road trip is
+    // incorrect.");
     assertThrows(IllegalArgumentException.class, () -> {
       F1.roadTrip(Arrays.asList(-1.0, 473.0));
     }, "Driving negative miles should throw an exception.");
@@ -125,7 +126,7 @@ public class Group2_5_TestFordFrivolousDrive extends BCATestScenario {
     assertEquals(F1.roadTrip(Arrays.asList(472.0, 0.0, 0.0, 0.0, 1.0)), 4, 0.1, "Road trip is incorrect.");
     assertEquals(F1.getRemainingRange(), 0, 0.1, "Remaining range is incorrect");
     assertEquals(F1.getFuelLevel(), 0, 0.1, "Fuel level is incorrect");
-    assertEquals(F1.getMileage(), 1334, 0.1, "Mileage is incorrect");
+    assertEquals(F1.getRemainingRange(), 1334, 0.1, "Mileage is incorrect");
 
     F1.refillTank();
 
@@ -138,10 +139,11 @@ public class Group2_5_TestFordFrivolousDrive extends BCATestScenario {
     assertEquals(F1.roadTrip(Arrays.asList(47.0, 92.0, 300.0)), 3, 0.1, "Road trip is incorrect.");
     assertEquals(F1.getRemainingRange(), 33, 0.1, "Remaining range is incorrect");
     assertEquals(F1.getFuelLevel(), 1.4, 0.1, "Fuel level is incorrect");
-    assertEquals(F1.getMileage(), 1773, 0.1, "Mileage is incorrect");
+    assertEquals(F1.getRemainingRange(), 1773, 0.1, "Mileage is incorrect");
 
     assertEquals(F2.roadTrip(Arrays.asList(473.0)), 0, 0.1, "Road trip is incorrect.");
-//    assertEquals(F2.roadTrip(Arrays.asList(473.0, -1.0)), 0, 0.1, "Road trip is incorrect.");
+    // assertEquals(F2.roadTrip(Arrays.asList(473.0, -1.0)), 0, 0.1, "Road trip is
+    // incorrect.");
     assertThrows(IllegalArgumentException.class, () -> {
       F2.roadTrip(Arrays.asList(-1.0, 473.0));
     }, "Driving negative miles should throw an exception.");
@@ -149,7 +151,7 @@ public class Group2_5_TestFordFrivolousDrive extends BCATestScenario {
     assertEquals(F2.roadTrip(Arrays.asList(472.0, 0.0, 0.0, 0.0, 1.0)), 4, 0.1, "Road trip is incorrect.");
     assertEquals(F2.getRemainingRange(), 0, 0.1, "Remaining range is incorrect");
     assertEquals(F2.getFuelLevel(), 0, 0.1, "Fuel level is incorrect");
-    assertEquals(F2.getMileage(), 1384, 0.1, "Mileage is incorrect");
+    assertEquals(F2.getRemainingRange(), 1384, 0.1, "Mileage is incorrect");
 
     F2.refillTank();
 
@@ -162,7 +164,7 @@ public class Group2_5_TestFordFrivolousDrive extends BCATestScenario {
     assertEquals(F2.roadTrip(Arrays.asList(47.0, 92.0, 300.0)), 3, 0.1, "Road trip is incorrect.");
     assertEquals(F2.getRemainingRange(), 33, 0.1, "Remaining range is incorrect");
     assertEquals(F2.getFuelLevel(), 1.4, 0.1, "Fuel level is incorrect");
-    assertEquals(F2.getMileage(), 1823, 0.1, "Mileage is incorrect");
+    assertEquals(F2.getRemainingRange(), 1823, 0.1, "Mileage is incorrect");
 
     return getFailedCount();
   }
