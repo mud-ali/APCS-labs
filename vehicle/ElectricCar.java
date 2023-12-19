@@ -29,7 +29,6 @@ public abstract class ElectricCar extends Car {
      * @throws IllegalArgumentException if miles is too high given the current charge.
      */
     public void drive(double miles) {
-        if (miles < 0 || getRemainingRange() < miles)
         if (canDrive(miles)) {
             addMiles(miles);
             decreaseCharge(miles);   
