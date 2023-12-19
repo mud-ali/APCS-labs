@@ -49,5 +49,6 @@ public class RunTestScenarios {
         }
 
         System.out.println("\nTests completed.");
+        in.close();
     }
 }
