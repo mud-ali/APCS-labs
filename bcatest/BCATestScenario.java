@@ -15,7 +15,12 @@ public abstract class BCATestScenario {
 
     /** Displays a formatted version of the failed message and increments the failed count. */
     private void assertionFailed(String failedMessage) {
-        System.out.println(getClass().getSimpleName() + " - Test Failed: " + failedMessage);
+        StackTraceElement[] ste = Thread.currentThread().getStackTrace();
+        int i = 1;  // [0] is the Thread class
+        while (ste[i].getClassName().contains("BCATestScenario")) {
+            i++;
+        }
+        System.out.println(ste[i].getClassName() + "." + ste[i].getMethodName() + ":" + ste[i].getLineNumber() + " - Test Failed: " + failedMessage);
         failed++;
     }
 
