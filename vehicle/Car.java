@@ -56,7 +56,7 @@ public abstract class Car {
      * whole number, ".0" should still display.
      */
     public String toString() {
-        return String.format("%s %s (%.1f mi)", make, model, getOdometerMiles());
+        return String.format("%s %s (%.1f mi)", getMake(), getModel(), getOdometerMiles());
     }
 
     /** Returns how many miles have been driven so far (odometer). */
@@ -109,11 +109,12 @@ public abstract class Car {
         for (int i = 0; i < milesEachDay.size(); i++) {
             try {
                 drive(milesEachDay.get(i));
+                daysDriven++;
             } catch (IllegalArgumentException ex) {
-                daysDriven = i;
                 break;
             }
         }
+
         return daysDriven;
     }
 }
