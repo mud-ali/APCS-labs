@@ -9,7 +9,7 @@ public class HondaAccordian extends GasPoweredCar {
      * that stuff. All Honda Accordian models have 14.5 gallon tanks and
      * 33.2 MPG. */
     public HondaAccordian(double startingOdometerValue, int modelYear) {
-        super("Honda", "Accordion", startingOdometerValue, 33.2, 14.5);
+        super("Honda", "Accordian", startingOdometerValue, 33.2, 14.5);
         this.year = modelYear;
     }
 
