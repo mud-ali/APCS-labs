@@ -17,7 +17,9 @@ public class FordFrivolous extends GasPoweredCar implements SelfDriving, Flying 
     @throws IllegalArgumentException if miles is negative. */
     public void driveAutonomously(double miles) {
         if (miles < 0) throw new IllegalArgumentException("miles must be positive");
-        drive(Math.min(miles, getRemainingRange())*2);
+        double driven = Math.min(miles, getRemainingRange());
+        drive(driven);
+        decreaseFuelLevel(driven);
     }
 
     /** Same as for Chevrolet Bird. */

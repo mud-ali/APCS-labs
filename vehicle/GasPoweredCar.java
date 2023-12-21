@@ -16,6 +16,7 @@ public abstract class GasPoweredCar extends Car {
         super(make, model, startingOdometerValue);
         this.mpg = mpg;
         this.fuelCapacityGallons = fuelCapacityGallons;
+        this.fuel = fuelCapacityGallons;
     }
 
     /**
