@@ -29,6 +29,7 @@ public class TeslaModelZ extends ElectricCar implements SelfDriving {
      * Returns the model and model number concatenated together. For
      * example, returns "Z70" for modelNum 70.
      */
+    @Override
     public String getModel() {
         return "Z"+modelNum;
     }
