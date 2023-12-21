@@ -1,7 +1,7 @@
 package vehicle;
 
 public class ChevroletBird extends ElectricCar implements Flying {
-    
+
     private boolean wingsOpen;
 
     /**
@@ -9,7 +9,7 @@ public class ChevroletBird extends ElectricCar implements Flying {
      * start with their wings retracted.
      */
     public ChevroletBird(double startingOdometerValue) {
-        super("Chevrolet","Bird",startingOdometerValue, 250.0);
+        super("Chevrolet", "Bird", startingOdometerValue, 250.0);
         wingsOpen = false;
     }
 
@@ -30,15 +30,20 @@ public class ChevroletBird extends ElectricCar implements Flying {
      * you retract your wings first!
      */
     public void drive(double miles) {
-        if (checkWingsExtended()) wingsOpen = false;
+        if (checkWingsExtended())
+            wingsOpen = false;
         super.drive(miles);
     }
 
     /**
      * Flying equivalent of canDrive.
+     * 
      * @throws IllegalArgumentException if miles is negative.
      */
     public boolean canFly(double miles) {
+        if (miles < 0) {
+            throw new IllegalArgumentException();
+        }
         return canDrive(miles);
     }
 
@@ -50,9 +55,10 @@ public class ChevroletBird extends ElectricCar implements Flying {
      * again in a minute? Too much opening and closing! Instead, drive()
      * is responsible for closing the wings if they are extended. (Extended
      * wings are dangerous on the highway!)
+     * 
      * @throws IllegalArgumentException if miles is negative.
      * @throws IllegalArgumentException if miles exceeds the remaining range
-     * of the car.
+     *                                  of the car.
      */
     public void fly(double miles) {
         if (!canFly(miles)) {

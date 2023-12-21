@@ -9,6 +9,7 @@ public abstract class Car {
 
     /**
      * Creates a car with starting total miles on the odometer.
+     * 
      * @throws IllegalArgumentException if startingOdometerValue is negative
      */
     public Car(String make, String model, double startingOdometerValue) {
@@ -18,7 +19,7 @@ public abstract class Car {
             throw new IllegalArgumentException("Odometer value must not be negative");
         this.miles = startingOdometerValue;
     }
-    
+
     /** Defaults startingOdometerValue to 0. */
     public Car(String make, String model) {
         this(make, model, 0.0);
@@ -28,18 +29,23 @@ public abstract class Car {
      * If able to drive the full given number of miles, returns true. If
      * not, returns false. (Determination is based upon how far the car can
      * drive given the remaining fuel/energy reserves.)
+     * 
      * @throws IllegalArgumentException if miles is negative.
      */
     public boolean canDrive(double miles) {
         if (miles < 0)
             throw new IllegalArgumentException("Miles cannot be a negative value");
-        return miles <= getRemainingRange();
+        if (miles <= getRemainingRange()) {
+            return true;
+        }
+        return false;
     }
 
     /**
      * Drives the full given number of miles.
+     * 
      * @throws IllegalArgumentException if miles is negative or if miles is
-     * too high given the current fuel.
+     *                                  too high given the current fuel.
      */
     public abstract void drive(double miles);
 
@@ -76,6 +82,7 @@ public abstract class Car {
 
     /**
      * Adds miles to the odometer.
+     * 
      * @throws IllegalArgumentException if miles is negative.
      */
     protected void addMiles(double miles) {
@@ -87,17 +94,19 @@ public abstract class Car {
      * miles in the list milesEachDay. Once the car cannot drive one of the
      * day’s distance, no more days are attempted. Returns the number of
      * days successfully driven.
+     * 
      * @throws IllegalArgumentException if miles is negative for any of the
-     * attempted days. The exception check should occur prior to any driving
-     * is attempted.
+     *                                  attempted days. The exception check should
+     *                                  occur prior to any driving
+     *                                  is attempted.
      */
     public int roadTrip(List<Double> milesEachDay) {
-        for (int i=0;i<milesEachDay.size();i++) {
+        for (int i = 0; i < milesEachDay.size(); i++) {
             if (milesEachDay.get(i) < 0)
                 throw new IllegalArgumentException("Attempted to drive a negative number of miles");
         }
         int daysDriven = 0;
-        for (int i=0;i<milesEachDay.size();i++) {
+        for (int i = 0; i < milesEachDay.size(); i++) {
             try {
                 drive(milesEachDay.get(i));
             } catch (IllegalArgumentException ex) {

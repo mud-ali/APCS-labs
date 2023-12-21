@@ -12,11 +12,16 @@ public class FordFrivolous extends GasPoweredCar implements SelfDriving, Flying 
         this(0.0);
     }
 
-    /** Autonomous driving works like Tesla’s – but it uses twice the
-    amount of the gas in comparison to regular driving. Whoops!
-    @throws IllegalArgumentException if miles is negative. */
+    /**
+     * Autonomous driving works like Tesla’s – but it uses twice the
+     * amount of the gas in comparison to regular driving. Whoops!
+     * 
+     * @throws IllegalArgumentException if miles is negative.
+     */
     public void driveAutonomously(double miles) {
-        if (miles < 0) throw new IllegalArgumentException("miles must be positive");
+        if (miles < 0)
+            throw new IllegalArgumentException("miles must be positive");
+
         double driven = Math.min(miles, getRemainingRange());
         drive(driven);
         decreaseFuelLevel(driven);
@@ -24,7 +29,10 @@ public class FordFrivolous extends GasPoweredCar implements SelfDriving, Flying 
 
     /** Same as for Chevrolet Bird. */
     public boolean canFly(double miles) {
-        return canDrive(miles);
+        if (miles < 0) {
+            throw new IllegalArgumentException();
+        }
+        return canDrive(miles * 3);
     }
 
     /**
@@ -36,7 +44,7 @@ public class FordFrivolous extends GasPoweredCar implements SelfDriving, Flying 
         if (!canFly(miles)) {
             throw new IllegalArgumentException("Cannot fly the given distance");
         }
-        decreaseFuelLevel(miles*3);
+        decreaseFuelLevel(miles * 3);
     }
-    
+
 }
