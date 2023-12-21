@@ -98,9 +98,9 @@ public abstract class Car {
         }
         int daysDriven = 0;
         for (int i=0;i<milesEachDay.size();i++) {
-            daysDriven = i;
             try {
                 drive(milesEachDay.get(i));
+                daysDriven++;
             } catch (IllegalArgumentException ex) {
                 break;
             }
