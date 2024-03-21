@@ -71,15 +71,16 @@ public class LookupList {
         }
     }
 
+    /**
+     * Insert a word into the already sorted list
+     * @param word - the word to insert
+     */
     public void insert(String word) {
-        // This inserts a word into the list in sorted position,
-        // assuming that the list is already sorted.
-
-        for (int i = wordlist.size(); i > 0; i--) { // work backwards
+        for (int i = wordlist.size(); i > 0; i--) {
             String w = wordlist.get(i - 1);
-            if (word.compareTo(w) >= 0) { // if >= item in list (w),
-                wordlist.add(i, word); // insert at correct place, which is right after the item
-                return; // done!
+            if (word.compareTo(w) >= 0) {
+                wordlist.add(i, word);
+                return;
             }
         }
         wordlist.add(0, word); // if < all items in list, add to front of list
