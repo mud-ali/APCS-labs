@@ -40,11 +40,11 @@ public class LookupList {
 
     private int binarySearch(String word, int s, int e) {
         int mid = (s+e)/2;
-        if (s>e) return -1;
+        if (s > e || s > wordlist.size()) return -1;
         String midWord = wordlist.get(mid);
         if (midWord.equals(word)) return mid;
         if (word.compareTo(midWord) < 0) 
-            return binarySearch(word, s, mid);
+            return binarySearch(word, s, mid-1);
         return binarySearch(word, mid+1, e);
     }
 
