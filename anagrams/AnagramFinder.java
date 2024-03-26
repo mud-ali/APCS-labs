@@ -2,14 +2,31 @@ package anagrams;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
 
 public class AnagramFinder {
 
+    private static void getAnagrams(String remaining, String startingbit, ArrayList<String> used, LookupList lookup) {
+        if (remaining.length()==0) {
+            if (lookup.contains(startingbit))
+                used.add(startingbit);
+            return;
+        }               
+        
+        for (int wordChoice=0;wordChoice<remaining.length();wordChoice++) {
+            String leftOvers = remaining.substring(0, wordChoice) + remaining.substring(wordChoice+1);
+            String newWord = startingbit+remaining.charAt(wordChoice);
+            getAnagrams(leftOvers, newWord, used, lookup);
+        }
+    }
+
     public static List<String> getAnagrams(String word, LookupList dict) {
-        // TODO
-        return new ArrayList<String>();
+        ArrayList<String> anagrams = new ArrayList<>();
+        getAnagrams(word, "", anagrams, dict);
+        anagrams = new ArrayList<>(new HashSet<String>(anagrams));
+        return anagrams;
     }
 
     public static void main(String[] args) throws FileNotFoundException {
