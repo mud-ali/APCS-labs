@@ -9,7 +9,7 @@ public class AnagramFinder {
 
     private static void getAnagrams(String remaining, String startingbit, ArrayList<String> used, LookupList lookup) {
         if (remaining.length()==0) {
-            if (lookup.contains(startingbit) && !used.contains(startingbit))
+            if (lookup.contains(startingbit) && !ListUtils.contains(used, startingbit))
                 used.add(startingbit);
             return;
         }               
