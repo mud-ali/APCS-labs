@@ -39,13 +39,15 @@ public class LookupList {
     }
 
     private int binarySearch(String word, int s, int e) {
-        int mid = (s+e)/2;
-        if (s > e || s > wordlist.size()) return -1;
+        int mid = (s + e) / 2;
+        if (s > e || s > wordlist.size())
+            return -1;
         String midWord = wordlist.get(mid);
-        if (midWord.equals(word)) return mid;
-        if (word.compareTo(midWord) < 0) 
-            return binarySearch(word, s, mid-1);
-        return binarySearch(word, mid+1, e);
+        if (midWord.equals(word))
+            return mid;
+        if (word.compareTo(midWord) < 0)
+            return binarySearch(word, s, mid - 1);
+        return binarySearch(word, mid + 1, e);
     }
 
     public int indexOf(String word) {
@@ -53,7 +55,7 @@ public class LookupList {
     }
 
     public boolean contains(String word) {
-        return indexOf(word)!=-1;
+        return indexOf(word) != -1;
     }
 
     public List<String> toList() {
@@ -62,7 +64,7 @@ public class LookupList {
 
     public void print() {
         int maxdigits = String.valueOf(wordlist.size()).length();
-        
+
         String format = "%" + maxdigits + "d: %s\n";
 
         System.out.printf("Wordlist (%d total):\n", wordlist.size());
@@ -73,6 +75,7 @@ public class LookupList {
 
     /**
      * Insert a word into the already sorted list
+     * 
      * @param word - the word to insert
      */
     public void insert(String word) {
@@ -91,8 +94,9 @@ public class LookupList {
     }
 
     private ArrayList<String> mergeSort(ArrayList<String> list) {
-        if (list.size()==1) return list;
-        int half = list.size()/2;
+        if (list.size() == 1)
+            return list;
+        int half = list.size() / 2;
 
         ArrayList<String> listA = new ArrayList<>(list.subList(0, half));
         ArrayList<String> listB = new ArrayList<>(list.subList(half, list.size()));
@@ -111,8 +115,10 @@ public class LookupList {
             }
         }
 
-        while (a < listA.size()) combined.add(listA.get(a++));
-        while (b < listB.size()) combined.add(listB.get(b++));
+        while (a < listA.size())
+            combined.add(listA.get(a++));
+        while (b < listB.size())
+            combined.add(listB.get(b++));
 
         return combined;
     }

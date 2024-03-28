@@ -12,12 +12,14 @@ public class ListUtils {
     }
 
     private static int binarySearch(String word, int s, int e, ArrayList<String> arr) {
-        int mid = (s+e)/2;
-        if (s > e || s > arr.size()) return -1;
+        int mid = (s + e) / 2;
+        if (s > e || s > arr.size())
+            return -1;
         String midWord = arr.get(mid);
-        if (midWord.equals(word)) return mid;
-        if (word.compareTo(midWord) < 0) 
-            return binarySearch(word, s, mid-1, arr);
-        return binarySearch(word, mid+1, e, arr);
+        if (midWord.equals(word))
+            return mid;
+        if (word.compareTo(midWord) < 0)
+            return binarySearch(word, s, mid - 1, arr);
+        return binarySearch(word, mid + 1, e, arr);
     }
 }
