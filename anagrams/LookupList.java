@@ -84,9 +84,6 @@ public class LookupList {
             }
         }
         wordlist.add(0, word); // if < all items in list, add to front of list
-        
-        // TODO Optional?? Rewrite to work a little bit faster! Hint: Use binarySearch
-        // to know WHERE to insert...
     }
 
     private void mergeSort() {
