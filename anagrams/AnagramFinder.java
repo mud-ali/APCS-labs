@@ -10,7 +10,7 @@ public class AnagramFinder {
 
     private static void getAnagrams(String remaining, String startingbit, ArrayList<String> used, LookupList lookup) {
         if (remaining.length()==0) {
-            if (lookup.contains(startingbit))
+            if (lookup.contains(startingbit) && !used.contains(startingbit))
                 used.add(startingbit);
             return;
         }               
@@ -25,7 +25,6 @@ public class AnagramFinder {
     public static List<String> getAnagrams(String word, LookupList dict) {
         ArrayList<String> anagrams = new ArrayList<>();
         getAnagrams(word, "", anagrams, dict);
-        anagrams = new ArrayList<>(new HashSet<String>(anagrams));
         return anagrams;
     }
 
