@@ -1,3 +1,0 @@
-# Anagrams
-
-Mudasir and Miguel
