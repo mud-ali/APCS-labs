@@ -1,4 +1,4 @@
-package src.pq;
+package priorityQueue;
 
 import java.util.NoSuchElementException;
 
@@ -7,31 +7,30 @@ import java.util.NoSuchElementException;
  */
 public interface BCAQueue<T> {
 
-	/** Adds a new element to the the queue. */
-	public void enqueue(T o);
+    /** Adds a new element to the the queue. */
+    public void enqueue(T o);
 
-	/**
-	 * Removes the next item from the queue and returns it.
-	 *
-	 * @exception NoSuchElementException
-	 *                if the queue is empty.
-	 */
-	public T dequeue();
+    /**
+     * Removes the next item from the queue and returns it.
+     *
+     * @exception NoSuchElementException if the queue is empty.
+     */
+    public T dequeue();
 
-	/**
-	 * Returns the next item from the queue without popping it.
-	 * If no item, returns null
-	 *
-	 */
-	public T peek();
+    /**
+     * Returns the next item from the queue without popping it. If no item,
+     * returns null
+     *
+     */
+    public T peek();
 
-	/**
-	 * Returns whether the queue is empty or not.
-	 */
-	public boolean isEmpty();
+    /**
+     * Returns whether the queue is empty or not.
+     */
+    public boolean isEmpty();
 
-	/**
-	 * Returns the number of items currently in the queue.
-	 */
-	public int size();
+    /**
+     * Returns the number of items currently in the queue.
+     */
+    public int size();
 }
