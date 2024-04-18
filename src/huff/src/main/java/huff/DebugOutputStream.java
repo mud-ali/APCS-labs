@@ -6,8 +6,8 @@ import java.io.*;
  * Created by bryres on 4/26/2017.
  */
 public class DebugOutputStream extends PrintStream {
-    private static final int bmask[] = { 0x80,0x40,0x20,0x10,
-            0x08,0x04,0x02,0x01};
+    private static final int bmask[] = { 0x80, 0x40, 0x20, 0x10,
+            0x08, 0x04, 0x02, 0x01 };
 
     public DebugOutputStream(OutputStream out) {
         super(out);

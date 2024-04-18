@@ -20,148 +20,148 @@ import java.io.*;
 
 public class BitOutputStream {
 
-	private static final int BYTE_SIZE = 8;
-	// Set DEBUG to true to output ASCII 0 and 1, instead of bits. 
-	// This produces a more readable output file for debugging purposes, but not a validly compressed one 
-	private static final boolean DEBUG = false;
+    private static final int BYTE_SIZE = 8;
+    // Set DEBUG to true to output ASCII 0 and 1, instead of bits.
+    // This produces a more readable output file for debugging purposes, but not a
+    // validly compressed one
+    private static final boolean DEBUG = false;
 
-	private static final int bmask[] = { 0x00, 0x01, 0x03, 0x07, 0x0f, 0x1f, 0x3f, 0x7f, 0xff, 0x1ff, 0x3ff, 0x7ff,
-			0xfff, 0x1fff, 0x3fff, 0x7fff, 0xffff, 0x1ffff, 0x3ffff, 0x7ffff, 0xfffff, 0x1fffff, 0x3fffff, 0x7fffff,
-			0xffffff, 0x1ffffff, 0x3ffffff, 0x7ffffff, 0xfffffff, 0x1fffffff, 0x3fffffff, 0x7fffffff, 0xffffffff };
+    private static final int bmask[] = { 0x00, 0x01, 0x03, 0x07, 0x0f, 0x1f, 0x3f, 0x7f, 0xff, 0x1ff, 0x3ff, 0x7ff,
+            0xfff, 0x1fff, 0x3fff, 0x7fff, 0xffff, 0x1ffff, 0x3ffff, 0x7ffff, 0xfffff, 0x1fffff, 0x3fffff, 0x7fffff,
+            0xffffff, 0x1ffffff, 0x3ffffff, 0x7ffffff, 0xfffffff, 0x1fffffff, 0x3fffffff, 0x7fffffff, 0xffffffff };
 
-	private OutputStream output;
+    private OutputStream output;
 
-	private int buffer;
-	private int bitsToGo;
+    private int buffer;
+    private int bitsToGo;
 
-	private int bitsWritten;
+    private int bitsWritten;
 
-	/**
-	 * Constructs a one-bit-at-a-time OutputStream from a file. (creates File
-	 * and calls alternative constructor)
-	 *
-	 * @param filePath
-	 *            Location of the output in the user's file system.
-	 */
-	public BitOutputStream(String filePath) {
-		this(new File(filePath));
-	}
+    /**
+     * Constructs a one-bit-at-a-time OutputStream from a file. (creates File
+     * and calls alternative constructor)
+     *
+     * @param filePath
+     *                 Location of the output in the user's file system.
+     */
+    public BitOutputStream(String filePath) {
+        this(new File(filePath));
+    }
 
-	/**
-	 * Constructs a one-bit-at-a-time OutputStream from a file. Re-throws
-	 * FileNotFoundException as a RuntimeException so that the user does not
-	 * have to catch and handle it in their own code.
-	 *
-	 * @param source
-	 *            File that the BitOutputStream will write to.
-	 */
-	public BitOutputStream(File source) {
-		try {
-			if (DEBUG) {
-				initialize(new DebugOutputStream(source));
-			}
-			else {
-				initialize(new FileOutputStream(source));
-			}
-		} catch (FileNotFoundException fnf) {
-			throw new RuntimeException("Could not open file " + fnf);
-		}
-	}
+    /**
+     * Constructs a one-bit-at-a-time OutputStream from a file. Re-throws
+     * FileNotFoundException as a RuntimeException so that the user does not
+     * have to catch and handle it in their own code.
+     *
+     * @param source
+     *               File that the BitOutputStream will write to.
+     */
+    public BitOutputStream(File source) {
+        try {
+            if (DEBUG) {
+                initialize(new DebugOutputStream(source));
+            } else {
+                initialize(new FileOutputStream(source));
+            }
+        } catch (FileNotFoundException fnf) {
+            throw new RuntimeException("Could not open file " + fnf);
+        }
+    }
 
-	/**
-	 * Constructs a one-bit-at-a-time OutputStream from another implementation
-	 * of OutputStream.
-	 *
-	 * @param out
-	 *            The alternative OutputStream to use as the output destination.
-	 */
-	public BitOutputStream(OutputStream out) {
-		initialize(out);
-	}
+    /**
+     * Constructs a one-bit-at-a-time OutputStream from another implementation
+     * of OutputStream.
+     *
+     * @param out
+     *            The alternative OutputStream to use as the output destination.
+     */
+    public BitOutputStream(OutputStream out) {
+        initialize(out);
+    }
 
-	/*
-	 * Initializes instance variables.
-	 */
-	private void initialize(OutputStream out) {
-		output = out;
-		bitsWritten = buffer = 0;
-		bitsToGo = BYTE_SIZE;
-	}
+    /*
+     * Initializes instance variables.
+     */
+    private void initialize(OutputStream out) {
+        output = out;
+        bitsWritten = buffer = 0;
+        bitsToGo = BYTE_SIZE;
+    }
 
-	/**
-	 * Allows to user to access the total number of bits written by the
-	 * OutputStream without counting themselves.
-	 *
-	 * @return bitsWritten which is incremented on every writeBits() call.
-	 */
-	public int getBitsWritten() {
-		return bitsWritten;
-	}
+    /**
+     * Allows to user to access the total number of bits written by the
+     * OutputStream without counting themselves.
+     *
+     * @return bitsWritten which is incremented on every writeBits() call.
+     */
+    public int getBitsWritten() {
+        return bitsWritten;
+    }
 
-	/**
-	 * Writes any bits remaining in the buffer out to the file.
-	 */
-	public void flush() {
-		if (bitsToGo != BYTE_SIZE) {
-			try {
-				output.write((buffer << bitsToGo));
-			} catch (IOException ioe) {
-				throw new RuntimeException("Error flushing buffer.  " + ioe);
-			}
-			buffer = 0;
-			bitsToGo = BYTE_SIZE;
-		}
+    /**
+     * Writes any bits remaining in the buffer out to the file.
+     */
+    public void flush() {
+        if (bitsToGo != BYTE_SIZE) {
+            try {
+                output.write((buffer << bitsToGo));
+            } catch (IOException ioe) {
+                throw new RuntimeException("Error flushing buffer.  " + ioe);
+            }
+            buffer = 0;
+            bitsToGo = BYTE_SIZE;
+        }
 
-		try {
-			output.flush();
-		} catch (IOException ioe) {
-			throw new RuntimeException("Error on flush " + ioe);
-		}
-	}
+        try {
+            output.flush();
+        } catch (IOException ioe) {
+            throw new RuntimeException("Error on flush " + ioe);
+        }
+    }
 
-	/**
-	 * Flushes remaining bits in buffer. Additional functionality depends on
-	 * implementation of underlying OutputStream.
-	 */
-	public void close() {
-		flush();
-		try {
-			output.close();
-		} catch (IOException ioe) {
-			throw new RuntimeException("Error closing BitOutputStream " + ioe);
-		}
-	}
+    /**
+     * Flushes remaining bits in buffer. Additional functionality depends on
+     * implementation of underlying OutputStream.
+     */
+    public void close() {
+        flush();
+        try {
+            output.close();
+        } catch (IOException ioe) {
+            throw new RuntimeException("Error closing BitOutputStream " + ioe);
+        }
+    }
 
-	/**
-	 * Writes numBits bits to the OutputStream. Uses a buffer to store extra
-	 * bits until there are enough to write a full byte.
-	 *
-	 * @param numBits
-	 *            The number of bits the user wants to write.
-	 * @param value
-	 *            The int value of the bits to write.
-	 */
-	public void writeBits(int numBits, int value) {
-		bitsWritten += numBits;
-		value &= bmask[numBits];
+    /**
+     * Writes numBits bits to the OutputStream. Uses a buffer to store extra
+     * bits until there are enough to write a full byte.
+     *
+     * @param numBits
+     *                The number of bits the user wants to write.
+     * @param value
+     *                The int value of the bits to write.
+     */
+    public void writeBits(int numBits, int value) {
+        bitsWritten += numBits;
+        value &= bmask[numBits];
 
-		while (numBits >= bitsToGo) {
-			buffer = (buffer << bitsToGo) | (value >>> (numBits - bitsToGo));
-			try {
-				output.write(buffer);
-			} catch (IOException ioe) {
-				throw new RuntimeException("Error writing bits " + ioe);
-			}
+        while (numBits >= bitsToGo) {
+            buffer = (buffer << bitsToGo) | (value >>> (numBits - bitsToGo));
+            try {
+                output.write(buffer);
+            } catch (IOException ioe) {
+                throw new RuntimeException("Error writing bits " + ioe);
+            }
 
-			value &= bmask[numBits - bitsToGo];
-			numBits -= bitsToGo;
-			bitsToGo = BYTE_SIZE;
-			buffer = 0;
-		}
+            value &= bmask[numBits - bitsToGo];
+            numBits -= bitsToGo;
+            bitsToGo = BYTE_SIZE;
+            buffer = 0;
+        }
 
-		if (numBits > 0) {
-			buffer = (buffer << numBits) | value;
-			bitsToGo -= numBits;
-		}
-	}
+        if (numBits > 0) {
+            buffer = (buffer << numBits) | value;
+            bitsToGo -= numBits;
+        }
+    }
 }
