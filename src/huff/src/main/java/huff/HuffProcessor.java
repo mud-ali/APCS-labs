@@ -58,8 +58,13 @@ public class HuffProcessor implements Processor {
      * the input file.
      */
     private int[] readForCounts(BitInputStream in) {
-        // TODO: Step 1
-        return new int[256];
+        int[] counts = new int[256];
+        int byteIn = 0;
+        while (byteIn != -1) {
+            counts[byteIn]++;
+            byteIn = in.readBits(8);
+        }
+        return counts;
     }
 
     /**
