@@ -87,10 +87,13 @@ public class HuffProcessor implements Processor {
      * PSEUDO_EOF and include it in the priority queue (and tree) as well.
      */
     private HuffNode makeTreeFromCounts(int[] array) {
-        // TODO: Step 2
         PriorityQueue<HuffNode> pq = new PriorityQueue<>();
-
-        return new HuffNode(-1, -1);
+        for (int i=0;i<array.length;i++) {
+            HuffNode node = new HuffNode(i, array[i]);
+            pq.add(node);
+        }
+        pq.add(new HuffNode(PSEUDO_EOF, 1));
+        return pq.peek();
     }
 
     /**
