@@ -88,6 +88,8 @@ public class HuffProcessor implements Processor {
      */
     private HuffNode makeTreeFromCounts(int[] array) {
         // TODO: Step 2
+        PriorityQueue<HuffNode> pq = new PriorityQueue<>();
+
         return new HuffNode(-1, -1);
     }
 
