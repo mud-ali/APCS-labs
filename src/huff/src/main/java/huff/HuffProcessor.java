@@ -152,6 +152,7 @@ public class HuffProcessor implements Processor {
      */
     private void writeHeader(HuffNode n, BitOutputStream out) {
         // TODO: Step 4
+        System.out.println("hi");
     }
 
     /**
