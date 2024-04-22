@@ -128,7 +128,17 @@ public class HuffProcessor implements Processor {
 
     private String[] makeCodingsFromTree(HuffNode root) {
         // TODO: Step 3! You will need to create a helper recursive method
-        return new String[257];
+        String[] encodings = new String[257];
+        makeCodingsFromTree(root, encodings, "");
+        return encodings;
+    }
+    private void makeCodingsFromTree(HuffNode root, String[] encodings, String path) {
+        if (root == null) {
+			return;
+		}
+        encodings[i] = path;
+        makeCodingsFromTree(root.left(), encodings, path + "0");
+        makeCodingsFromTree(root.right(), encodings, path + "1");
     }
 
     /**
