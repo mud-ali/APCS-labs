@@ -184,7 +184,7 @@ public class HuffProcessor implements Processor {
      * Write the body of the compressed file. Read through the input stream 8 bits
      * at time. Look up the encoding for that byte from "codings". Write that
      * encoding to the output stream using the following, which interprets the
-     * String as a binary number to convert it to an int and then writes the 
+     * String as a binary number to convert it to an int and then writes the
      * correct number of bits to represent that number to output:
      * int code = Integer.parseInt(strCode, 2);
      * out.writeBits(strCode.length(), code);
@@ -229,8 +229,14 @@ public class HuffProcessor implements Processor {
      * set to -1.
      */
     HuffNode readHeader(BitInputStream in) {
-        // TODO: Step 6
-        return new HuffNode(-1, -1);
+        int bit = in.readBits(1);
+        if (bit==0) {
+            return new HuffNode(-1, -1, readHeader(in), readHeader(in));
+        } else {
+            int nextChar = in.readBits(9);
+            HuffNode leaf = new HuffNode(nextChar, -1);
+            return leaf;
+        }
     }
 
     /**
