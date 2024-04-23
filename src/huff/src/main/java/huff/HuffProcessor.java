@@ -59,7 +59,7 @@ public class HuffProcessor implements Processor {
      */
     private int[] readForCounts(BitInputStream in) {
         int[] counts = new int[256];
-        int byteIn = 0;
+        int byteIn = in.readBits(8);
         while (byteIn != -1) {
             counts[byteIn]++;
             byteIn = in.readBits(8);
@@ -167,39 +167,40 @@ public class HuffProcessor implements Processor {
      * Traverse the tree using preorder traversal.
      * For each internal node, write "0" to the output and traverse left and right.
      * For each leaf, write "1" to the output followed by the 9 bit representation
-     * of
-     * the value stored in the leaf.
+     * of the value stored in the leaf.
      */
     private void writeHeader(HuffNode n, BitOutputStream out) {
-        if (n.left() == null && n.right() == null) {
+        if (n.isLeaf()) {
             out.writeBits(1, 1);
             out.writeBits(9, n.value());
             return;
         }
-        if (n.left() != null) {
-            out.writeBits(1, 0);
-            writeHeader(n.left(), out);
-        }
-        if (n.right() != null) {
-            out.writeBits(1, 0);
-            writeHeader(n.right(), out);
-        }
+        out.writeBits(1, 0);
+        writeHeader(n.left(), out);
+        writeHeader(n.right(), out);
     }
 
     /**
      * Write the body of the compressed file. Read through the input stream 8 bits
      * at time. Look up the encoding for that byte from "codings". Write that
      * encoding to the output stream using the following, which interprets the
-     * String
-     * as a binary number to convert it to an int and then writes the correct number
-     * of bits to represent that number to output:
+     * String as a binary number to convert it to an int and then writes the 
+     * correct number of bits to represent that number to output:
      * int code = Integer.parseInt(strCode, 2);
      * out.writeBits(strCode.length(), code);
      * After reading through all of "in", write PSEUDO_EOF as a final encoded
      * character to the file.
      */
     private void writeCompressedBits(BitInputStream in, String[] codings, BitOutputStream out) {
-        // TODO: Step 5
+        int nextByte = in.readBits(8);
+        String strCode;
+        while (nextByte != -1) {
+            strCode = codings[nextByte];
+            out.writeBits(strCode.length(), Integer.parseInt(strCode, 2));
+            nextByte = in.readBits(8);
+        }
+        strCode = codings[PSEUDO_EOF];
+        out.writeBits(strCode.length(), Integer.parseInt(strCode, 2));
     }
 
     @Override
