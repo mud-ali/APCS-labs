@@ -171,8 +171,19 @@ public class HuffProcessor implements Processor {
      * the value stored in the leaf.
      */
     private void writeHeader(HuffNode n, BitOutputStream out) {
-        // TODO: Step 4
-        System.out.println("hi");
+        if (n.left() == null && n.right() == null) {
+            out.writeBits(1, 1);
+            out.writeBits(9, n.value());
+            return;
+        }
+        if (n.left() != null) {
+            out.writeBits(1, 0);
+            writeHeader(n.left(), out);
+        }
+        if (n.right() != null) {
+            out.writeBits(1, 0);
+            writeHeader(n.right(), out);
+        }
     }
 
     /**
