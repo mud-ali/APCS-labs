@@ -88,11 +88,18 @@ public class HuffProcessor implements Processor {
      */
     private HuffNode makeTreeFromCounts(int[] array) {
         PriorityQueue<HuffNode> pq = new PriorityQueue<>();
-        for (int i=0;i<array.length;i++) {
-            HuffNode node = new HuffNode(i, array[i]);
-            pq.add(node);
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] != 0)
+                pq.add(new HuffNode(i, array[i]));
         }
         pq.add(new HuffNode(PSEUDO_EOF, 1));
+
+        while (pq.size() > 1) {
+            HuffNode a = pq.poll();
+            HuffNode b = pq.poll();
+            HuffNode newNode = new HuffNode(-1, a.weight() + b.weight(), a, b);
+            pq.add(newNode);
+        }
         return pq.peek();
     }
 
@@ -127,18 +134,18 @@ public class HuffProcessor implements Processor {
      */
 
     private String[] makeCodingsFromTree(HuffNode root) {
-        // TODO: Step 3! You will need to create a helper recursive method
         String[] encodings = new String[257];
-        makeCodingsFromTree(root, encodings, "");
+        makeCodingsFromTree(root, encodings, "", 0);
         return encodings;
     }
-    private void makeCodingsFromTree(HuffNode root, String[] encodings, String path) {
-        if (root == null) {
-			return;
-		}
-        encodings[i] = path;
-        makeCodingsFromTree(root.left(), encodings, path + "0");
-        makeCodingsFromTree(root.right(), encodings, path + "1");
+
+    private void makeCodingsFromTree(HuffNode root, String[] encodings, String path, int index) {
+        if (root.left() == null || root.right() == null) {
+            encodings[root.value()] = path;
+            return;
+        }
+        makeCodingsFromTree(root.left(), encodings, path + "0", index);
+        makeCodingsFromTree(root.right(), encodings, path + "1", index + 1);
     }
 
     /**
