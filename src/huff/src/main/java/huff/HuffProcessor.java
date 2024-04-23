@@ -135,17 +135,17 @@ public class HuffProcessor implements Processor {
 
     private String[] makeCodingsFromTree(HuffNode root) {
         String[] encodings = new String[257];
-        makeCodingsFromTree(root, encodings, "", 0);
+        makeCodingsFromTree(root, encodings, "");
         return encodings;
     }
 
-    private void makeCodingsFromTree(HuffNode root, String[] encodings, String path, int index) {
+    private void makeCodingsFromTree(HuffNode root, String[] encodings, String path) {
         if (root.left() == null || root.right() == null) {
             encodings[root.value()] = path;
             return;
         }
-        makeCodingsFromTree(root.left(), encodings, path + "0", index);
-        makeCodingsFromTree(root.right(), encodings, path + "1", index + 1);
+        makeCodingsFromTree(root.left(), encodings, path + "0");
+        makeCodingsFromTree(root.right(), encodings, path + "1");
     }
 
     /**
