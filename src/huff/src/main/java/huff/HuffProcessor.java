@@ -230,7 +230,7 @@ public class HuffProcessor implements Processor {
      */
     HuffNode readHeader(BitInputStream in) {
         int bit = in.readBits(1);
-        if (bit==0) {
+        if (bit == 0) {
             return new HuffNode(-1, -1, readHeader(in), readHeader(in));
         } else {
             int nextChar = in.readBits(9);
@@ -248,7 +248,20 @@ public class HuffProcessor implements Processor {
      * (If the value of the leaf is PSEUDO_EOF, exit the function.)
      */
     private void readCompressedBits(HuffNode root, BitInputStream in, BitOutputStream out) {
-        // TODO: Step 7
+        int bit = in.readBits(1);
+        while (bit != -1) {
+            HuffNode current = root;
+            while (!current.isLeaf()) {
+                if (bit == 0)
+                    current = current.left();
+                else
+                    current = current.right();
+                bit = in.readBits(1);
+            }
+            if (current.value() == PSEUDO_EOF)
+                return;
+            out.writeBits(8, current.value());
+        }
     }
 
 }
